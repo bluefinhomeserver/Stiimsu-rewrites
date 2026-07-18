@@ -206,7 +206,7 @@ chmod +x ~/Documents/iisu-bridge/start-iisu.sh
 Give it a menu entry shortcut (and this is also what you add to Steam):
 
 ```bash
-bashtee ~/.local/share/applications/iisu-frontend.desktop > /dev/null << 'EOF'
+tee ~/.local/share/applications/iisu-frontend.desktop > /dev/null << 'EOF'
 [Desktop Entry]
 Type=Application
 Name=iiSU Frontend
