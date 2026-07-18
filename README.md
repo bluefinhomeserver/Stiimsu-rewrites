@@ -176,33 +176,6 @@ systemctl --user daemon-reload
 
 ## 8. Launch iiSU
 
-This script boots the whole stack straight into iiSU:
-
-```bash
-tee ~/Documents/iisu-bridge/start-iisu.sh > /dev/null << 'EOF'
-IISU_PKG=com.iisulauncher
-STATUS_URL=http://192.168.240.1:5987/status
-TOKEN=$(cat "$HOME/Documents/iisu-bridge/token" 2>/dev/null)
-
-iisu_running() {
-    sudo -n waydroid shell -- pidof "$IISU_PKG" > /dev/null 2>&1
-}
-emulator_running() {
-    curl -s -m 3 -X POST "$STATUS_URL" \
-        -H 'Content-Type: application/json' \
-        -d "{\"token\":\"$TOKEN\"}" 2>/dev/null | grep -q '"running": *true'
-}
-
-systemctl --user start iisu-bridge.service
-waydroid app launch "$IISU_PKG"
-for i in $(seq 1 60); do iisu_running && break; sleep 2; done
-while iisu_running || emulator_running; do sleep 5; done
-systemctl --user stop iisu-bridge.service
-waydroid session stop
-EOF
-chmod +x ~/Documents/iisu-bridge/start-iisu.sh
-```
-
 Give it a menu entry shortcut (and this is also what you add to Steam):
 
 ```bash
