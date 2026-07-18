@@ -25,7 +25,7 @@ emulator.
 
 ```
 stiimsu-helper/
-  SETUP.md                   this guide
+  README.md                  this guide
   stiimsu_helper.py          the Stiimsu Helper app (backend + UI)
   run-stiimsu-helper.sh      launcher for the app
   install.sh                 installer (app + daemon + menu entry)
