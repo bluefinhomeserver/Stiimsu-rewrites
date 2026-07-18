@@ -178,7 +178,7 @@ systemctl --user daemon-reload
 
 This script boots the whole stack straight into iiSU:
 
-```
+```bash
 bashtee ~/Documents/iisu-bridge/start-iisu.sh > /dev/null << 'EOF'
 IISU_PKG=com.iisulauncher
 STATUS_URL=http://192.168.240.1:5987/status
@@ -205,7 +205,7 @@ chmod +x ~/Documents/iisu-bridge/start-iisu.sh
 
 Give it a menu entry shortcut (and this is also what you add to Steam):
 
-```
+```bash
 bashtee ~/.local/share/applications/iisu-frontend.desktop > /dev/null << 'EOF'
 [Desktop Entry]
 Type=Application
