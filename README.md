@@ -179,7 +179,7 @@ systemctl --user daemon-reload
 This script boots the whole stack straight into iiSU:
 
 ```bash
-bashtee ~/Documents/iisu-bridge/start-iisu.sh > /dev/null << 'EOF'
+tee ~/Documents/iisu-bridge/start-iisu.sh > /dev/null << 'EOF'
 IISU_PKG=com.iisulauncher
 STATUS_URL=http://192.168.240.1:5987/status
 TOKEN=$(cat "$HOME/Documents/iisu-bridge/token" 2>/dev/null)
