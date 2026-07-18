@@ -106,6 +106,13 @@ sudo waydroid shell -- appops set com.iisulauncher MANAGE_EXTERNAL_STORAGE allow
 
 Open iiSU once from Waydroid to confirm it runs.
 
+(If you want **Fullscreen** KDE can force it permanently via a window rule: 
+with iiSU open, right-click its title bar → More Actions → Configure Special Window Settings → 
+Add Property → Fullscreen → set to Apply Initially → in the same dialog make sure the 
+window match is on the window class (waydroid), not the exact title → OK. 
+Every Waydroid window from then on opens fullscreen. 
+Apply Initially still lets you un-fullscreen with the same menu if you ever need the desktop.)
+
 ## 4. Create the ROM library (one-time)
 
 Games live inside Waydroid's shared storage so both worlds can see them:
@@ -176,19 +183,7 @@ systemctl --user daemon-reload
 
 ## 8. Launch iiSU
 
-Give it a menu entry shortcut (and this is also what you add to Steam):
-
-```bash
-tee ~/.local/share/applications/iisu-frontend.desktop > /dev/null << 'EOF'
-[Desktop Entry]
-Type=Application
-Name=iiSU (SteamOS Edition)
-Comment=Android emulator frontend bridged to native SteamOS emulators
-Exec=/home/deck/Documents/iisu-bridge/start-iisu.sh
-Terminal=false
-Categories=Game;
-EOF
-```
+iiSU helper and iiSU for steam OS should have appeared under Games in the desktop menu. You can add a shortcut to desktop if it is missing.
 
 For Gaming Mode: in Steam (Desktop Mode) → Games → Add a Non-Steam Game
 to My Library → pick iiSU Frontend. You can also add custom artwork to the steam shortcut via
@@ -259,7 +254,10 @@ this automatically: pick a PS3 ISO in **Add a game** and it's extracted into
 it — the marker is what iiSU shows as the game, and the daemon redirects it
 to the real boot file at launch.
 
-Note: the ISO must be a **decrypted** dump. PC-made (redump-style) ISOs
+Note: If you see an error like 7z failed and/or bsdtar: failed when trying to add a game to your library,
+this can normally be ignored and the game will be added sucessfully.
+
+Note 2: the ISO must be a **decrypted** dump. PC-made (redump-style) ISOs
 are encrypted and come with a `.dkey` file holding the disc key. Decrypt
 first with the bundled static `ps3dec` (no dependencies, runs on stock
 SteamOS), or decrypt it using another ps3 decryption application:
