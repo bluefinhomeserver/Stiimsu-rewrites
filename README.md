@@ -178,6 +178,7 @@ systemctl --user daemon-reload
 
 This script boots the whole stack straight into iiSU:
 
+```
 bashtee ~/Documents/iisu-bridge/start-iisu.sh > /dev/null << 'EOF'
 IISU_PKG=com.iisulauncher
 STATUS_URL=http://192.168.240.1:5987/status
@@ -200,9 +201,11 @@ systemctl --user stop iisu-bridge.service
 waydroid session stop
 EOF
 chmod +x ~/Documents/iisu-bridge/start-iisu.sh
+```
 
 Give it a menu entry shortcut (and this is also what you add to Steam):
 
+```
 bashtee ~/.local/share/applications/iisu-frontend.desktop > /dev/null << 'EOF'
 [Desktop Entry]
 Type=Application
@@ -212,6 +215,7 @@ Exec=/home/deck/Documents/iisu-bridge/start-iisu.sh
 Terminal=false
 Categories=Game;
 EOF
+```
 
 For Gaming Mode: in Steam (Desktop Mode) → Games → Add a Non-Steam Game
 to My Library → pick iiSU Frontend.
