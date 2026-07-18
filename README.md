@@ -142,7 +142,7 @@ sudo chmod 440 /etc/sudoers.d/zz-iisu-bridge
 
 ## 6. Install the bridge and the Helper
 
-Unzip this bundle and run the installer:
+Unzip this bundle and run the installer (first extract the stiimsu-helper folder into downloads, or in another directory then cd into that):
 
 ```bash
 cd ~/Downloads/stiimsu-helper
