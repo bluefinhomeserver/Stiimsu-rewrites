@@ -191,7 +191,8 @@ EOF
 ```
 
 For Gaming Mode: in Steam (Desktop Mode) → Games → Add a Non-Steam Game
-to My Library → pick iiSU Frontend.
+to My Library → pick iiSU Frontend. You can also add custom artwork to the steam shortcut via
+the custom artwork folder.
 
 ## 9. Install your emulators
 
