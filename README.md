@@ -79,7 +79,7 @@ passwd
 
 Waydroid is the Android container that hosts iiSU. On SteamOS the reliable
 route is the community **SteamOS Waydroid Installer** (search GitHub for
-`SteamOS-Waydroid-Installer` by ryanrudolfoba). However you can also build Waydroid yourself which may be reccomended. Please read **install_waydroid_steamOS.md** to learn how to do that yourself.
+`SteamOS-Waydroid-Installer` by ryanrudolfoba). However you can also build Waydroid yourself which may be reccomended. Please read **WAYDROID-STEAMOS-GUIDE.md** to learn how to do that yourself.
 
 Sanity check when done:
 
