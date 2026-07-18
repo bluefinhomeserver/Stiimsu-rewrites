@@ -115,7 +115,7 @@ root-owned by Android, so hand yourself the `roms` part once:
 ```bash
 sudo mkdir -p ~/.local/share/waydroid/data/media/0/roms
 sudo chown -R deck:deck ~/.local/share/waydroid/data/media/0/roms
-chmod a+rX ~/.local/share/waydroid/data/media/0/roms
+sudo chmod a+rX ~/.local/share/waydroid/data/media/0/roms
 ```
 
 After this, the Stiimsu Helper's **Add a game** screen can create per-console
