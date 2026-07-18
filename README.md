@@ -209,8 +209,8 @@ Give it a menu entry shortcut (and this is also what you add to Steam):
 tee ~/.local/share/applications/iisu-frontend.desktop > /dev/null << 'EOF'
 [Desktop Entry]
 Type=Application
-Name=iiSU Frontend
-Comment=Android game frontend bridged to native SteamOS emulators
+Name=iiSU (SteamOS Edition)
+Comment=Android emulator frontend bridged to native SteamOS emulators
 Exec=/home/deck/Documents/iisu-bridge/start-iisu.sh
 Terminal=false
 Categories=Game;
