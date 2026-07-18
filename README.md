@@ -59,7 +59,7 @@ Supported consoles:
 * Xbox
 * Xbox 360
 * RetroArch as a multi-system emulator
-I could not get PS Vita Emulation to work, sorry... 
+* I could not get PS Vita Emulation to work, sorry... 
 
 ---
 
