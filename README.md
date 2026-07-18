@@ -4,8 +4,8 @@ A SteamOS-Android bridge for running iisu and playing through linux-native emula
 # iisu-bridge — Full Setup Guide (Steam Deck / SteamOS)
 
 Run the **iiSU** Android game frontend on your Steam Deck, but have every game
-launch a **native SteamOS emulator** e.g PCSX2, Dolphin, RPCS3, RetroArch and
-friends instead of inside waydroid/android emulation.
+launch a **native SteamOS emulator** e.g PCSX2, Dolphin, RPCS3, RetroArch etc 
+instead of inside waydroid/android emulation.
 
 How it works: 
 - iiSU runs inside **Waydroid** (an Android
