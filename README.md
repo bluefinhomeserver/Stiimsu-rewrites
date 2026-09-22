@@ -145,10 +145,10 @@ sudo chmod 440 /etc/sudoers.d/zz-iisu-bridge
 Rewritten for fish shell (CachyOS etc.):
 
 ```bash
-echo '<user> ALL=(root) NOPASSWD: /usr/bin/waydroid`  
-<user> ALL=(root) NOPASSWD: /usr/bin/chmod o+x /home/<user>/.local/share/waydroid/data`  
-<user> ALL=(root) NOPASSWD: /usr/bin/chmod o+x /home/<user>/.local/share/waydroid/data/media`  
-<user> ALL=(root) NOPASSWD: /usr/bin/chmod o+x /home/<user>/.local/share/waydroid/data/media/0' | sudo tee /etc/sudoers.d/zz-iisu-bridge > /dev/null
+echo "<user> ALL=(root) NOPASSWD: /usr/bin/waydroid  
+<user> ALL=(root) NOPASSWD: /usr/bin/chmod o+x /home/<user>/.local/share/waydroid/data  
+<user> ALL=(root) NOPASSWD: /usr/bin/chmod o+x /home/<user>/.local/share/waydroid/data/media  
+<user> ALL=(root) NOPASSWD: /usr/bin/chmod o+x /home/<user>/.local/share/waydroid/data/media/0" | sudo tee /etc/sudoers.d/zz-iisu-bridge > /dev/null
 
 sudo chmod 440 /etc/sudoers.d/zz-iisu-bridge
 ```
