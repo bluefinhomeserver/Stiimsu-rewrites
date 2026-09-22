@@ -176,7 +176,7 @@ This copies the app to `~/Documents/iisu-bridge/app/`, deploys the daemon to
 future re-runs, never overwritten), and adds **Stiimsu Helper** to your app
 menu. Re-running `install.sh` is also how you update later.
 
-## 7. Create the daemon service
+## 6. Create the daemon service
 
 The daemon runs as a systemd *user* service, started on demand by the
 launcher (it does not auto-start at boot)
@@ -213,7 +213,7 @@ systemctl --user daemon-reload
 
 (REPLACE `<user>` with your linux user)
 
-## 8. Launch iiSU
+## 7. Launch iiSU
 
 iiSU helper and iiSU for steam OS should have appeared under Games in the desktop menu. You can add a shortcut to desktop if it is missing.
 
@@ -222,7 +222,7 @@ to My Library → pick iiSU Frontend.
 
 You can also add custom artwork to the steam shortcut via the custom artwork folder.
 
-## 9. Install your emulators
+## 8. Install your emulators
 
 The bridge launches whatever you have; it doesn't ship emulators.
 
@@ -254,7 +254,7 @@ Two Windows-only emulators need a `wine`/Proton wrapper you configure
 yourself via Custom command: **Xenia** (Xbox 360) and **BigPEmu** (Jaguar —
 or use the RetroArch VirtualJaguar default instead), I won't go over the exact details here.
 
-## 10. Using Stiimsu Helper
+## 9. Using Stiimsu Helper
 
 Launch **Stiimsu Helper** from the app menu (Waydroid should be running when
 installing stubs). It opens in your browser, quits itself when you close the
@@ -321,7 +321,7 @@ chmod +x ~/Downloads/stiimsu-helper/tools/ps3dec
 Then add the `decrypted.iso` through the Helper. Also the first time — RPCS3
 needs its firmware installed (`PS3UPDAT.PUP` via File → Install Firmware).
 
-## 11. Configure iiSU and play
+## 10. Configure iiSU and play
 
 Inside iiSU, for each console: add the library folder, point its folder
 picker at `roms/<console>` under internal storage and assign the emulator
@@ -331,7 +331,7 @@ launches the stub, the stub calls the daemon, your native emulator opens over
 Waydroid, and iiSU quietly closes during play and returns when you exit the
 game.
 
-## 12. Updating
+## 11. Updating
 
 Download the new bundle, then:
 
@@ -342,7 +342,7 @@ cd stiimsu-helper && ./install.sh
 ```
 (REPLACE <directory> with your linux directory)
 
-## 13. Troubleshooting
+## 12. Troubleshooting
 
 To see debugging logs for any errors that could appear: `journalctl --user -u iisu-bridge -f`
 
@@ -372,7 +372,7 @@ AppImage). The core picker and checkmark line in the Helper resolve both.
 *iiSU shows a stale error from a previous attempt* — iiSU sometimes redisplays
 the last emulator error; check the journal timestamps
 
-## 14. Security note
+## 13. Security note
 
 All stubs, the daemon, and the launcher share one bridge token, baked in at
 build time. The daemon only listens on the Waydroid-internal interface
