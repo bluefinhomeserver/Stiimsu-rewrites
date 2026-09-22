@@ -282,6 +282,23 @@ picks it up with no restart) and the stub APK installs into Waydroid.
 **Add a game.** Pick the console, Browse to your ROM/ISO, click Add. The file
 is copied into the library and made readable. **PS3 is special** — see below.
 
+**Importing all your already existing roms**
+
+If you have a folder already containing roms, structured correctly
+
+*structure.png*
+
+
+You can import your entire collection into iisu by binding the folders.
+This does not add extra storage.
+Binding as similar to symlinks in the sense that it routes to the destination
+
+```bash
+sudo mount --bind ~/.local/share/waydroid/data/media/0/ /<filepath>
+```
+(REPLACE <filepath> with your filepath)
+(if you have spaces in your file path, add brackets, like this "/<filepath>")
+
 **Manage library.** Lists everything in the roms tree with sizes (PS3
 marker+folder pairs shown as one game) and deletes cleanly, including the
 read-only folders disc extraction produces. This is the supported way to
