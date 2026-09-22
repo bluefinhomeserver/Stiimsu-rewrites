@@ -1,6 +1,6 @@
 <img width="3840" height="1280" alt="Image" src="https://github.com/user-attachments/assets/0f275ad2-94a3-4ed5-aa82-de3ec7409f24" />
 
-Stiimsu
+# Stiimsu
 A SteamOS-Android bridge for running iisu and playing through linux-native emulators.
 
 # iisu-bridge — Full Setup Guide (Steam Deck / SteamOS)
@@ -123,11 +123,9 @@ root-owned by Android, so hand yourself the `roms` part once:
 
 ```bash
 sudo mkdir -p ~/.local/share/waydroid/data/media/0/roms
-sudo chown -R <user>:<user> ~/.local/share/waydroid/data/media/0/roms
+sudo chown -R deck:deck ~/.local/share/waydroid/data/media/0/roms
 sudo chmod a+rX ~/.local/share/waydroid/data/media/0/roms
 ```
-
-(REPLACE `<user>` with your linux user)
 
 After this, the Stiimsu Helper's **Add a game** screen can create per-console
 subfolders and copies files for you into the`/roms` folder.
@@ -138,46 +136,28 @@ The daemon needs passwordless rights for exactly two things:
 - Driving Waydroid (stop/relaunch iiSU during game boot and close)
 - Re-opening the traversal permission Android relocks on the media folders at every boot.
 
-The commands run in this step create the sudoers file with the the `zz-` prefix matters (sudoers files are read alphabetically and the last
+Create the sudoers file with the the `zz-` prefix matters (sudoers files are read alphabetically and the last
 match wins, so this must sort after SteamOS's own files):
-
-Bash (works on most normal setups) :
 
 ```bash
 sudo tee /etc/sudoers.d/zz-iisu-bridge > /dev/null << 'EOF'
-<user> ALL=(root) NOPASSWD: /usr/bin/waydroid
-<user> ALL=(root) NOPASSWD: /usr/bin/chmod o+x /home/<user>/.local/share/waydroid/data
-<user> ALL=(root) NOPASSWD: /usr/bin/chmod o+x /home/<user>/.local/share/waydroid/data/media
-<user> ALL=(root) NOPASSWD: /usr/bin/chmod o+x /home/<user>/.local/share/waydroid/data/media/0
+deck ALL=(root) NOPASSWD: /usr/bin/waydroid
+deck ALL=(root) NOPASSWD: /usr/bin/chmod o+x /home/deck/.local/share/waydroid/data
+deck ALL=(root) NOPASSWD: /usr/bin/chmod o+x /home/deck/.local/share/waydroid/data/media
+deck ALL=(root) NOPASSWD: /usr/bin/chmod o+x /home/deck/.local/share/waydroid/data/media/0
 EOF
 sudo chmod 440 /etc/sudoers.d/zz-iisu-bridge
 ```
 
-Rewritten for fish shell:
-
-```bash
-echo '<user> ALL=(root) NOPASSWD: /usr/bin/waydroid`  
-<user> ALL=(root) NOPASSWD: /usr/bin/chmod o+x /home/<user>/.local/share/waydroid/data`  
-<user> ALL=(root) NOPASSWD: /usr/bin/chmod o+x /home/<user>/.local/share/waydroid/data/media`  
-<user> ALL=(root) NOPASSWD: /usr/bin/chmod o+x /home/<user>/.local/share/waydroid/data/media/0' | sudo tee /etc/sudoers.d/zz-iisu-bridge > /dev/null
-
-sudo chmod 440 /etc/sudoers.d/zz-iisu-bridge
-```
-
-
-(REPLACE `<user>` with your linux user)
-
 ## 6. Install the bridge and the Helper
 
-Unzip this bundle and run the installer (first extract the stiimsu-helper folder into a directory of your choice then cd into that):
+Unzip this bundle and run the installer (first extract the stiimsu-helper folder into downloads, or in another directory then cd into that):
 
 ```bash
-cd ~/<directory>/stiimsu-helper
+cd ~/Downloads/stiimsu-helper
 chmod +x install.sh
 ./install.sh
 ```
-
-(REPLACE `<directory>` with your linux directory)
 
 This copies the app to `~/Documents/iisu-bridge/app/`, deploys the daemon to
 `~/Documents/iisu-bridge/iisu_bridge_daemon.py`, seeds
@@ -188,9 +168,7 @@ menu. Re-running `install.sh` is also how you update later.
 ## 7. Create the daemon service
 
 The daemon runs as a systemd *user* service, started on demand by the
-launcher (it does not auto-start at boot)
-
-Bash (works on most normal setups) :
+launcher (it does not auto-start at boot):
 
 ```bash
 mkdir -p ~/.config/systemd/user
@@ -199,28 +177,11 @@ tee ~/.config/systemd/user/iisu-bridge.service > /dev/null << 'EOF'
 Description=iiSU bridge daemon (Waydroid frontend -> native SteamOS emulators)
 
 [Service]
-ExecStart=/usr/bin/python3 /home/<user>/Documents/iisu-bridge/iisu_bridge_daemon.py
+ExecStart=/usr/bin/python3 /home/deck/Documents/iisu-bridge/iisu_bridge_daemon.py
 Restart=on-failure
 EOF
 systemctl --user daemon-reload
 ```
-
-Rewritten for fish shell:
-
-```bash
-mkdir -p ~/.config/systemd/user  
-echo "[Unit]  
-Description=iiSU bridge daemon (Waydroid frontend -> native SteamOS emulators)
-
-[Service]  
-ExecStart=/usr/bin/python3 /home/<user>/Documents/iisu-bridge/iisu_bridge_daemon.py  
-Restart=on-failure" | sudo tee ~/.config/systemd/user/iisu-bridge.service > /dev/null
-
-systemctl --user daemon-reload
-
-```
-
-(REPLACE `<user>` with your linux user)
 
 ## 8. Launch iiSU
 
@@ -282,23 +243,6 @@ picks it up with no restart) and the stub APK installs into Waydroid.
 **Add a game.** Pick the console, Browse to your ROM/ISO, click Add. The file
 is copied into the library and made readable. **PS3 is special** — see below.
 
-**Importing all your already existing roms**
-
-If you have a folder already containing roms, structured correctly
-
-*structure.png*
-
-
-You can import your entire collection into iisu by binding the folders.
-This does not add extra storage.
-Binding as similar to symlinks in the sense that it routes to the destination
-
-```bash
-sudo mount --bind ~/.local/share/waydroid/data/media/0/ /<filepath>
-```
-(REPLACE <filepath> with your filepath)
-(if you have spaces in your file path, add brackets, like this "/<filepath>")
-
 **Manage library.** Lists everything in the roms tree with sizes (PS3
 marker+folder pairs shown as one game) and deletes cleanly, including the
 read-only folders disc extraction produces. This is the supported way to
@@ -345,14 +289,13 @@ Download the new bundle, then:
 
 ```bash
 pkill -f stiimsu_helper
-cd ~/<directory> && rm -rf stiimsu-helper && unzip stiimsu-helper.zip
+cd ~/Downloads && rm -rf stiimsu-helper && unzip stiimsu-helper.zip
 cd stiimsu-helper && ./install.sh
 ```
-(REPLACE <directory> with your linux directory)
 
 ## 13. Troubleshooting
 
-To see debugging logs for any errors that could appear: `journalctl --user -u iisu-bridge -f`
+To see logs for any errors that could appear: `journalctl --user -u iisu-bridge -f`
 
 Common issues:
 
