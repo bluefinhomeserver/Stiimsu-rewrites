@@ -345,13 +345,14 @@ Download the new bundle, then:
 
 ```bash
 pkill -f stiimsu_helper
-cd ~/Downloads && rm -rf stiimsu-helper && unzip stiimsu-helper.zip
+cd ~/<directory> && rm -rf stiimsu-helper && unzip stiimsu-helper.zip
 cd stiimsu-helper && ./install.sh
 ```
+(REPLACE <directory> with your linux directory)
 
 ## 13. Troubleshooting
 
-To see logs for any errors that could appear: `journalctl --user -u iisu-bridge -f`
+To see debugging logs for any errors that could appear: `journalctl --user -u iisu-bridge -f`
 
 Common issues:
 
