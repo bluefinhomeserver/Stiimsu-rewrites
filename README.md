@@ -169,13 +169,15 @@ sudo chmod 440 /etc/sudoers.d/zz-iisu-bridge`
 
 ## 6. Install the bridge and the Helper
 
-Unzip this bundle and run the installer (first extract the stiimsu-helper folder into downloads, or in another directory then cd into that):
+Unzip this bundle and run the installer (first extract the stiimsu-helper folder into a directory of your choice then cd into that):
 
 ```bash
-cd ~/Downloads/stiimsu-helper
+cd ~/<directory>/stiimsu-helper
 chmod +x install.sh
 ./install.sh
 ```
+
+(REPLACE `<directory>` with your linux directory)
 
 This copies the app to `~/Documents/iisu-bridge/app/`, deploys the daemon to
 `~/Documents/iisu-bridge/iisu_bridge_daemon.py`, seeds
