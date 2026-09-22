@@ -5,8 +5,8 @@ A SteamOS-Android bridge for running iisu and playing through linux-native emula
 
 # iisu-bridge — Full Setup Guide (Steam Deck / SteamOS)
 
-Run the **iiSU** Android game frontend on your Steam Deck, but have every game
-launch a **native SteamOS emulator** e.g PCSX2, Dolphin, RPCS3, RetroArch etc 
+Run the **iiSU** Gaming frontend on your Linux Operating System, but have every game
+launch a **Linux native emulator** e.g PCSX2, Dolphin, RPCS3, RetroArch etc 
 instead of inside waydroid/android emulation.
 
 How it works: 
@@ -14,7 +14,7 @@ How it works:
 container).
 - When you press play, a tiny **stub APK** impersonating the Android
 emulator catches the launch, and sends the game's path to a small **daemon**
-on the SteamOS side, which translates the path and starts your native
+on the Linux side, which translates the path and starts your native
 emulator.
 - A control-panel web app, **Stiimsu Helper**, manages all of it.
 
@@ -61,23 +61,10 @@ Supported consoles:
 * Xbox
 * Xbox 360
 * RetroArch as a multi-system emulator
-* I could not get PS Vita Emulation to work, sorry... 
 
 ---
 
-## 1. Prepare SteamOS
-
-Everything happens in **Desktop Mode** (Steam button → Power → Switch to
-Desktop). Open the **Konsole** terminal for the commands below.
-
-If you have never set a password for the `deck` user, please do it as several
-steps need `sudo`:
-
-```bash
-passwd
-```
-
-## 2. Install Waydroid
+## 1. Install Waydroid
 
 Waydroid is the Android container that hosts iiSU. On SteamOS the reliable
 route is the community **SteamOS Waydroid Installer** (search GitHub for
@@ -90,7 +77,7 @@ waydroid status        # should say the session is RUNNING while Waydroid is ope
 ls ~/.local/share/waydroid/data/media/0/    # Android's /sdcard, on the host side
 ```
 
-## 3. Install iiSU into Waydroid
+## 2. Install iiSU into Waydroid
 
 Get the iiSU APK from the iiSU project, then (with the Waydroid session
 running):
@@ -108,14 +95,16 @@ sudo waydroid shell -- appops set com.iisulauncher MANAGE_EXTERNAL_STORAGE allow
 
 Open iiSU once from Waydroid to confirm it runs.
 
-(If you want **Fullscreen** KDE can force it permanently via a window rule: 
-with iiSU open, right-click its title bar → More Actions → Configure Special Window Settings → 
-Add Property → Fullscreen → set to Apply Initially → in the same dialog make sure the 
-window match is on the window class (waydroid), not the exact title → OK. 
-Every Waydroid window from then on opens fullscreen. 
-Apply Initially still lets you un-fullscreen with the same menu if you ever need the desktop.)
+Waydroid Fulscreen KDE
 
-## 4. Create the ROM library (one-time)
+Waydroid Fulscreen
+
+```bash
+waydroid prop set persist.waydroid.width <Monitor_width> waydroid prop set persist.waydroid.height <Monitor_height> waydroid session stop #relaunch waydroid
+sudo waydroid shell wm size #shows current waydroid size
+```
+
+## 3. Create the ROM library (one-time)
 
 Games live inside Waydroid's shared storage so both worlds can see them:
 `~/.local/share/waydroid/data/media/0/roms/<console>/`. That tree is
@@ -132,7 +121,7 @@ sudo chmod a+rX ~/.local/share/waydroid/data/media/0/roms
 After this, the Stiimsu Helper's **Add a game** screen can create per-console
 subfolders and copies files for you into the`/roms` folder.
 
-## 5. Allow the bridge its two privileged actions
+## 4. Allow the bridge its two privileged actions
 
 The daemon needs passwordless rights for exactly two things:
 - Driving Waydroid (stop/relaunch iiSU during game boot and close)
@@ -153,7 +142,7 @@ EOF
 sudo chmod 440 /etc/sudoers.d/zz-iisu-bridge
 ```
 
-Rewritten for fish shell:
+Rewritten for fish shell (CachyOS etc.):
 
 ```bash
 echo '<user> ALL=(root) NOPASSWD: /usr/bin/waydroid`  
@@ -161,13 +150,13 @@ echo '<user> ALL=(root) NOPASSWD: /usr/bin/waydroid`
 <user> ALL=(root) NOPASSWD: /usr/bin/chmod o+x /home/<user>/.local/share/waydroid/data/media`  
 <user> ALL=(root) NOPASSWD: /usr/bin/chmod o+x /home/<user>/.local/share/waydroid/data/media/0' | sudo tee /etc/sudoers.d/zz-iisu-bridge > /dev/null
 
-sudo chmod 440 /etc/sudoers.d/zz-iisu-bridge`
+sudo chmod 440 /etc/sudoers.d/zz-iisu-bridge
 ```
 
 
 (REPLACE `<user>` with your linux user)
 
-## 6. Install the bridge and the Helper
+## 5. Install the bridge and the Helper
 
 Unzip this bundle and run the installer (first extract the stiimsu-helper folder into a directory of your choice then cd into that):
 
@@ -205,7 +194,7 @@ EOF
 systemctl --user daemon-reload
 ```
 
-Rewritten for fish shell:
+Rewritten for fish shell(CachyOS etc.):
 
 ```bash
 mkdir -p ~/.config/systemd/user  
@@ -226,9 +215,10 @@ systemctl --user daemon-reload
 
 iiSU helper and iiSU for steam OS should have appeared under Games in the desktop menu. You can add a shortcut to desktop if it is missing.
 
-For Gaming Mode: in Steam (Desktop Mode) → Games → Add a Non-Steam Game
-to My Library → pick iiSU Frontend. You can also add custom artwork to the steam shortcut via
-the custom artwork folder.
+In the Steam desktop app → Games → Add a Non-Steam Game
+to My Library → pick iiSU Frontend. 
+
+You can also add custom artwork to the steam shortcut via the custom artwork folder.
 
 ## 9. Install your emulators
 
