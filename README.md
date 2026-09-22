@@ -1,6 +1,6 @@
 <img width="3840" height="1280" alt="Image" src="https://github.com/user-attachments/assets/0f275ad2-94a3-4ed5-aa82-de3ec7409f24" />
 
-# Stiimsu
+Stiimsu
 A SteamOS-Android bridge for running iisu and playing through linux-native emulators.
 
 # iisu-bridge — Full Setup Guide (Steam Deck / SteamOS)
@@ -123,9 +123,11 @@ root-owned by Android, so hand yourself the `roms` part once:
 
 ```bash
 sudo mkdir -p ~/.local/share/waydroid/data/media/0/roms
-sudo chown -R deck:deck ~/.local/share/waydroid/data/media/0/roms
+sudo chown -R <user>:<user> ~/.local/share/waydroid/data/media/0/roms
 sudo chmod a+rX ~/.local/share/waydroid/data/media/0/roms
 ```
+
+(REPLACE `<user>` with your linux user)
 
 After this, the Stiimsu Helper's **Add a game** screen can create per-console
 subfolders and copies files for you into the`/roms` folder.
@@ -139,15 +141,31 @@ The daemon needs passwordless rights for exactly two things:
 Create the sudoers file with the the `zz-` prefix matters (sudoers files are read alphabetically and the last
 match wins, so this must sort after SteamOS's own files):
 
+Bash (works on most normal setups) :
+
 ```bash
 sudo tee /etc/sudoers.d/zz-iisu-bridge > /dev/null << 'EOF'
-deck ALL=(root) NOPASSWD: /usr/bin/waydroid
-deck ALL=(root) NOPASSWD: /usr/bin/chmod o+x /home/deck/.local/share/waydroid/data
-deck ALL=(root) NOPASSWD: /usr/bin/chmod o+x /home/deck/.local/share/waydroid/data/media
-deck ALL=(root) NOPASSWD: /usr/bin/chmod o+x /home/deck/.local/share/waydroid/data/media/0
+<user> ALL=(root) NOPASSWD: /usr/bin/waydroid
+<user> ALL=(root) NOPASSWD: /usr/bin/chmod o+x /home/<user>/.local/share/waydroid/data
+<user> ALL=(root) NOPASSWD: /usr/bin/chmod o+x /home/<user>/.local/share/waydroid/data/media
+<user> ALL=(root) NOPASSWD: /usr/bin/chmod o+x /home/<user>/.local/share/waydroid/data/media/0
 EOF
 sudo chmod 440 /etc/sudoers.d/zz-iisu-bridge
 ```
+
+Rewritten for fish shell:
+
+```bash
+echo '<user> ALL=(root) NOPASSWD: /usr/bin/waydroid`  
+<user> ALL=(root) NOPASSWD: /usr/bin/chmod o+x /home/<user>/.local/share/waydroid/data`  
+<user> ALL=(root) NOPASSWD: /usr/bin/chmod o+x /home/<user>/.local/share/waydroid/data/media`  
+<user> ALL=(root) NOPASSWD: /usr/bin/chmod o+x /home/<user>/.local/share/waydroid/data/media/0' | sudo tee /etc/sudoers.d/zz-iisu-bridge > /dev/null
+
+sudo chmod 440 /etc/sudoers.d/zz-iisu-bridge`
+```
+
+
+(REPLACE `<user>` with your linux user)
 
 ## 6. Install the bridge and the Helper
 
@@ -168,7 +186,9 @@ menu. Re-running `install.sh` is also how you update later.
 ## 7. Create the daemon service
 
 The daemon runs as a systemd *user* service, started on demand by the
-launcher (it does not auto-start at boot):
+launcher (it does not auto-start at boot)
+
+Bash (works on most normal setups) :
 
 ```bash
 mkdir -p ~/.config/systemd/user
@@ -177,11 +197,28 @@ tee ~/.config/systemd/user/iisu-bridge.service > /dev/null << 'EOF'
 Description=iiSU bridge daemon (Waydroid frontend -> native SteamOS emulators)
 
 [Service]
-ExecStart=/usr/bin/python3 /home/deck/Documents/iisu-bridge/iisu_bridge_daemon.py
+ExecStart=/usr/bin/python3 /home/<user>/Documents/iisu-bridge/iisu_bridge_daemon.py
 Restart=on-failure
 EOF
 systemctl --user daemon-reload
 ```
+
+Rewritten for fish shell:
+
+```bash
+mkdir -p ~/.config/systemd/user  
+echo "[Unit]  
+Description=iiSU bridge daemon (Waydroid frontend -> native SteamOS emulators)
+
+[Service]  
+ExecStart=/usr/bin/python3 /home/<user>/Documents/iisu-bridge/iisu_bridge_daemon.py  
+Restart=on-failure" | sudo tee ~/.config/systemd/user/iisu-bridge.service > /dev/null
+
+systemctl --user daemon-reload
+
+```
+
+(REPLACE `<user>` with your linux user)
 
 ## 8. Launch iiSU
 
