@@ -138,7 +138,7 @@ The daemon needs passwordless rights for exactly two things:
 - Driving Waydroid (stop/relaunch iiSU during game boot and close)
 - Re-opening the traversal permission Android relocks on the media folders at every boot.
 
-Create the sudoers file with the the `zz-` prefix matters (sudoers files are read alphabetically and the last
+The commands run in this step create the sudoers file with the the `zz-` prefix matters (sudoers files are read alphabetically and the last
 match wins, so this must sort after SteamOS's own files):
 
 Bash (works on most normal setups) :
