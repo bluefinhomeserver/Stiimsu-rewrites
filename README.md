@@ -1,6 +1,6 @@
 <img width="3840" height="1280" alt="Image" src="https://github.com/user-attachments/assets/0f275ad2-94a3-4ed5-aa82-de3ec7409f24" />
 
-Stiimsu
+# Stiimsu
 A SteamOS-Android bridge for running iisu and playing through linux-native emulators.
 
 # iisu-bridge — Full Setup Guide (Linux)
