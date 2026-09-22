@@ -3,7 +3,7 @@
 Stiimsu
 A SteamOS-Android bridge for running iisu and playing through linux-native emulators.
 
-# iisu-bridge — Full Setup Guide (Steam Deck / SteamOS)
+# iisu-bridge — Full Setup Guide (Linux)
 
 Run the **iiSU** Gaming frontend on your Linux Operating System, but have every game
 launch a **Linux native emulator** e.g PCSX2, Dolphin, RPCS3, RetroArch etc 
