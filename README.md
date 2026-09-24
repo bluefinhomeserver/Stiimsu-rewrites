@@ -77,9 +77,9 @@ for example
 Arch based:
 
 ```bash
-Pacman -S Waydroid
+pacman -S Waydroid
 
-Paru -S Waydroid
+paru -S Waydroid
 ```
 etc.
 
