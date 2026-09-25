@@ -89,8 +89,6 @@ sudo apt install Waydroid
 ```
 etc.
 
-FOR ANY FURTHER INSTRUCTIONS ON USING WAYDROID AND FIXING ISSUES. PLEASE CONSULT THE > [WAYDROID DOCUMENTATION](https://docs.waydro.id/) <
-
 However you can also build Waydroid yourself which may be reccomended. Please read **WAYDROID-STEAMOS-GUIDE.md** to learn how to do that yourself.
 
 Sanity check when done:
@@ -99,6 +97,10 @@ Sanity check when done:
 waydroid status        # should say the session is RUNNING while Waydroid is open
 ls ~/.local/share/waydroid/data/media/0/    # Android's /sdcard, on the host side
 ```
+
+FOR ANY FURTHER INSTRUCTIONS ON USING WAYDROID, INSTALLATION AND FIXING ISSUES. 
+
+PLEASE CONSULT THE > [WAYDROID DOCUMENTATION](https://docs.waydro.id/) <
 
 ## 2. Install iiSU into Waydroid
 
