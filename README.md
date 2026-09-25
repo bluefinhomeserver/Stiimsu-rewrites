@@ -89,6 +89,8 @@ sudo apt install Waydroid
 ```
 etc.
 
+FOR ANY FURTHER INSTRUCTIONS ON USING WAYDROID AND FIXING ISSUES. PLEASE CONSULT THE > [WAYDROID DOCUMENTATION](https://docs.waydro.id/) <
+
 However you can also build Waydroid yourself which may be reccomended. Please read **WAYDROID-STEAMOS-GUIDE.md** to learn how to do that yourself.
 
 Sanity check when done:
