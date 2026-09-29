@@ -1,5 +1,7 @@
 <img width="3840" height="1280" alt="Image" src="https://github.com/user-attachments/assets/0f275ad2-94a3-4ed5-aa82-de3ec7409f24" />
 
+[At the moment, even this approach does not work and will give you a Socket timeout. If it does work for you, please message @fr3pass on discord and or post your findings in the iiSU discord qa-iisu thread Is linux supported yet?]
+
 # Stiimsu
 A SteamOS-Android bridge for running iisu and playing through linux-native emulators.
 
