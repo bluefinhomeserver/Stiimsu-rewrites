@@ -1,7 +1,5 @@
 <img width="3840" height="1280" alt="Image" src="https://github.com/user-attachments/assets/0f275ad2-94a3-4ed5-aa82-de3ec7409f24" />
 
-[At the moment, even this approach does not work and will give you a Socket timeout. If it does work for you, please message @fr3pass on discord and or post your findings in the iiSU discord qa-iisu thread Is linux supported yet?]
-
 # Stiimsu
 A SteamOS-Android bridge for running iisu and playing through linux-native emulators.
 
@@ -355,6 +353,22 @@ RetroArch for anything you have the core installed on. Then press play: iiSU
 launches the stub, the stub calls the daemon, your native emulator opens over
 Waydroid, and iiSU quietly closes during play and returns when you exit the
 game.
+
+## 10.5 POTENTIAL ISSUE: Socket timeout
+
+If instead of launching a suitable emulator, you encounter the Socket timeout error
+
+open up the python sctipt located at
+
+```bash
+~/Documents/iisu-bridge/iisu_bridge_daemon.py
+```
+
+and change the bind port to "0.0.0.0"
+
+```bash
+BIND_ADDR = "0.0.0.0"
+```
 
 ## 11. Updating
 
