@@ -364,7 +364,7 @@ open up the python sctipt located at
 ~/Documents/iisu-bridge/iisu_bridge_daemon.py
 ```
 
-and change the bind port to "0.0.0.0"
+and change the bind address to "0.0.0.0" (meaning "this host on this network")
 
 ```bash
 BIND_ADDR = "0.0.0.0"
