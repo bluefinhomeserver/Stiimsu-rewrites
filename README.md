@@ -309,7 +309,7 @@ This does not add extra storage.
 Binding as similar to symlinks in the sense that it routes to the destination
 
 ```bash
-sudo mount --bind ~/.local/share/waydroid/data/media/0/ /<filepath>
+sudo mount --bind /<filepath> ~/.local/share/waydroid/data/media/0/ 
 ```
 (REPLACE <filepath> with your filepath)
 (if you have spaces in your file path, add brackets, like this "/<filepath>")
