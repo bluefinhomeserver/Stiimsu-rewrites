@@ -370,6 +370,15 @@ and change the bind address to "0.0.0.0" (meaning "this host on this network")
 BIND_ADDR = "0.0.0.0"
 ```
 
+Also make sure your firewall of choice is not conflicting
+
+UFW (example)
+
+```bash
+sudo ufw allow 5987/tcp
+sudo ufw reload
+```
+
 ## 11. Updating
 
 Download the new bundle, then:
